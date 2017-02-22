@@ -1,0 +1,21 @@
+#puzzle-board {
+  border: 1px solid black;
+  width: 800px;
+  height: 540px;
+  padding: 24px;
+  margin: 0px auto;
+  background: pink;
+}
+
+#puzzle-board > div {
+  background: blue;
+  border:#000 1px solid;
+  width:71px;
+  height:71px;
+  float:left;
+  margin:10px;
+  padding:20px;
+  font-size:64px;
+  cursor:pointer;
+  text-align:center;
+}
