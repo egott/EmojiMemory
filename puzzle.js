@@ -1,6 +1,7 @@
 $(document).ready(function() {
   var puzzle = {
-    cards: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10],
+    cards: ['😎', '😎', '👽', '👽', '👻', '👻', '😜', '😜', '😈', '😈', '🦄', '🦄', '🙈', '🙈', '☃️', '☃️', 🍭, 🍭, '💘', '💘' ],
+    // cards: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10],
     init: function() {
       puzzle.shuffle();
     },
@@ -40,10 +41,14 @@ $(document).ready(function() {
       //how many cards have been selected
       //if 2 items have been selected we need to check the 2
       if ($('.selected').length === 2) {
+        //if the 2 items match change the opacity to 0 (they look gone)
+        //if not remove the selected class
         if ($('.selected').first().data('cardValue') == $('.selected').last().data('cardValue')) {
           $('.selected').each(function() {
             $(this).animate({
               opacity: 0
+              //set all cards to unmatched to count and see how many are left
+              //when all classes are left you will see there are no unmatched cards left
             }).removeClass('unmatched');
           });
           $('.selected').each(function() {
@@ -51,6 +56,7 @@ $(document).ready(function() {
           });
           puzzle.checkWin();
         } else {
+          //wait one second before it turns back over
           //flip the cards over
           //remove class
           setTimeout(function() {
@@ -62,6 +68,8 @@ $(document).ready(function() {
       }
     },
     checkWin: function() {
+      //if the unmatched class length is 0, there are no more cards
+      //append to container you won
       if ($('.unmatched').length === 0) {
         $('.container').html('<h1>You Won!</h1>');
       }
