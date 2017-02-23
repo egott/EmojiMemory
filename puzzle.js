@@ -2,7 +2,7 @@ $(document).ready(function() {
   var puzzle = {
     cards: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10],
     init: function() {
-      this.shuffle();
+      puzzle.shuffle();
     },
     shuffle: function() {
       var random = 0;
@@ -32,16 +32,32 @@ $(document).ready(function() {
     },
     clickHandlers: function() {
       $('.card').on('click', function() {
-        //set html equal to a pargraph tag
-        $(this).html('<p>'+ $(this).data('cardValue')+'</p>').addClass('selected');
+        $(this).html('<p>' + $(this).data('cardValue') + '</p>').addClass('selected');
+        puzzle.checkMatch();
       });
     },
     checkMatch: function() {
       //how many cards have been selected
       //if 2 items have been selected we need to check the 2
-      if($('.selected').length == 2) {
+      if ($('.selected').length === 2) {
         if ($('.selected').first().data('cardValue') == $('.selected').last().data('cardValue')) {
-          
+          $('.selected').each(function() {
+            $(this).animate({
+              opacity: 0
+            }).removeClass('unmatched');
+          });
+          $('.selected').each(function() {
+            $(this).removeClass('selected');
+          });
+          puzzle.checkWin();
+        } else {
+          //flip the cards over
+          //remove class
+          setTimeout(function() {
+            $('.selected').each(function() {
+              $(this).html('').removeClass('selected');
+            });
+          }, 1000);
         }
       }
     },
