@@ -1,8 +1,10 @@
 $(document).ready(function() {
+  var cards = {'1a': '😎', '1b': '😎', '2a':'👽', '2b': '👽', '3a': '👻', '3b': '👻', '4a': '😜', '4b': '😜', '5a': '😈', '5b': '😈', '6a': '🦄', '6b': '🦄', '7a': '🙈', '7b': '🙈', '8a': '🍭', '8b': '🍭', '9a': '💖', '9b': '💖', '10a': '🐣', '10b':'🐣' }
+  var card_keys = Object.values(cards);
   var puzzle = {
-    cards: ['😎', '😎', '👽', '👽', '👻', '👻', '😜', '😜', '😈', '😈', '🦄', '🦄', '🙈', '🙈', '☃️', '☃️', 🍭, 🍭, '💘', '💘' ],
-    // cards: [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10],
+    card_keys: card_keys,
     init: function() {
+      $('.play-again-button').hide();
       puzzle.shuffle();
     },
     shuffle: function() {
@@ -12,28 +14,29 @@ $(document).ready(function() {
       //then will point to random index number, swap it out
       //store current index number into this.cards and set it into temp variable
       //then set this.current to random and then random back to temp
-      for (i = 1; i < puzzle.cards.length; i++) {
+      for (i = 1; i < card_keys.length; i++) {
         random = Math.round(Math.random() * i);
-        temp = puzzle.cards[i];
-        puzzle.cards[i] = puzzle.cards[random];
-        puzzle.cards[random] = temp;
+        temp = puzzle.card_keys[i];
+        console.log(temp)
+        puzzle.card_keys[i] = puzzle.card_keys[random];
+        puzzle.card_keys[random] = temp;
       }
       puzzle.assignCards();
-      console.log('Shuffled Card Array: ' + puzzle.cards);
+      console.log('Shuffled Card Array: ' + puzzle.card_keys);
     },
     assignCards: function() {
       //needs to be shuffled, then assigned
       //pass in index number of each card, for first card it will look for first element in array
       //assign a data-card-value attribute equal to this.cards of that index
       $('.card').each(function(index) {
-        $(this).attr('data-card-value', puzzle.cards[index]);
+        $(this).attr('data-card-value', puzzle.card_keys[index]);
       });
       //dont want to click before it is assinged/shuffled
       puzzle.clickHandlers();
     },
     clickHandlers: function() {
       $('.card').on('click', function() {
-        $(this).html('<p>' + $(this).data('cardValue') + '</p>').addClass('selected');
+        $(this).html('<div class="emoji-box"><p class="emoji">' + $(this).data('cardValue') + '</p></div>').addClass('selected');
         puzzle.checkMatch();
       });
     },
@@ -71,7 +74,8 @@ $(document).ready(function() {
       //if the unmatched class length is 0, there are no more cards
       //append to container you won
       if ($('.unmatched').length === 0) {
-        $('.container').html('<h1>You Won!</h1>');
+        $('.container').html('<h1 class="winner">You Won!</h1>');
+        $('.play-again-button').toggle();
       }
     }
   };
