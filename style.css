@@ -1,0 +1,54 @@
+.container {
+	width: 800px;
+	margin: 0 auto;
+}
+
+.card {
+	height: 120px;
+	width: 120px;
+	background-color:#001;
+	background-image: radial-gradient(white 15%, transparent 16%),
+	radial-gradient(white 15%, transparent 16%);
+	background-size:60px 60px;
+	background-position: 0 0, 30px 30px;
+background-color: #232927;
+background-size: 50px 50px;
+	float: left;
+	margin: 10px;
+	border-radius: 15px;
+}
+.winner{
+	text-align: center;
+	font-family: Century Gothic, sans-serif;
+}
+
+#title {
+	text-align: center;
+	font-family: Century Gothic, sans-serif;
+}
+
+p.emoji {
+		font-size: 50px;
+
+	 	 text-align: center;
+}
+.cards {
+	border: 2px solid red;
+}
+
+.restart-button {
+	padding: 15px;
+	height:20px;
+ 	width:100px;
+ 	margin: -20px -50px;
+ 	position:relative;
+ 	top:50%;
+ 	left:50%;
+
+}
+/*.emoji-box {
+	border: 2px solid red;
+	padding-bottom: 90px;
+	height: 50px;
+	width: 50px;
+}*/
