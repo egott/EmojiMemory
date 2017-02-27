@@ -1,9 +1,12 @@
 $(document).ready(function() {
+  $('.restart-button').click(function(){
+    location.reload();
+  })
   var cards = {'1a': '😎', '1b': '😎', '2a':'👽', '2b': '👽', '3a': '👻', '3b': '👻', '4a': '😜', '4b': '😜', '5a': '😈', '5b': '😈', '6a': '🦄', '6b': '🦄', '7a': '🙈', '7b': '🙈', '8a': '🍭', '8b': '🍭', '9a': '💖', '9b': '💖', '10a': '🐣', '10b':'🐣' }
   var card_keys = Object.values(cards);
-  $('.play-again-button').hide();
   var puzzle = {
     card_keys: card_keys,
+
     init: function() {
       puzzle.shuffle();
     },
@@ -75,7 +78,6 @@ $(document).ready(function() {
       //append to container you won
       if ($('.unmatched').length === 0) {
         $('.container').html('<h1 class="winner">You Won!</h1>');
-        $('.play-again-button').toggle();
       }
     }
   };
